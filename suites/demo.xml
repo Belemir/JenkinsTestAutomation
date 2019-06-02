@@ -2,7 +2,7 @@
 <suite name="Demo Suite">
  <test name="demo test">
      <classes>
-         <class name="com.test.automation.JenkinsTestAutomation.SuiteTest"></class>
+         <class name="com.test.automation.JenkinsTestAutomation.App"></class>
      </classes>
  </test>
 </suite>
