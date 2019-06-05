@@ -4,35 +4,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
-/**
- * Hello world!
- *
- */
 public class App {
+	WebDriver driver;
+	By popUp = By.xpath("/html/body/div[8]/div/div/a");
+			
 	@Test
-	public void main() throws InterruptedException {
-
-		// TODO Auto-generated method stub
-		System.setProperty("webdriver.chrome.driver","C:/Users/Toshiba/Downloads/chromedriver_74.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.get("https://www.koton.com/tr/");
-		//Assert.assertTrue(driver.getTitle().contains("koton")); // doğrulama 
+	public void f() {
+		
+		System.setProperty("webdriver.chrome.driver", "C:/Users/Toshiba/Downloads/chromedriver_74.exe");
+		driver = new ChromeDriver();
+		driver.get("https://tr.aliexpress.com/");
 		driver.manage().window().maximize();
-		
-		WebElement searchElement = driver.findElement(By.name("text"));//arama butonunu buluyoruz
-		searchElement.sendKeys("bluz"); 
-		searchElement.submit();
-		Thread.sleep(9000);
-		
-		WebElement xsElement = driver.findElement(By.xpath(".//div[@class='productListFilter']//div[@class='filterWrapper'][4]//li[@class='show']//label[@for='XS']"));
-				
-		if (!xsElement.isSelected()) {
-			xsElement.click();
-		}
+		Actions action = new Actions(driver);
 
-		driver.quit();
+		if(this.checkElementIsExistByLocator(popUp)) {
+			WebElement close = driver.findElement(popUp);
+			close.click();
+		};
 		
+		WebElement takiElement = driver.findElement(By.xpath("//*[@id=\'home-firstscreen\']/div/div/div[2]/div/div[2]/dl[6]/dt/span/a"));
+		action.moveToElement(takiElement).build().perform();
+	}
+
+	public boolean checkElementIsExistByLocator(By locator) {
+		try {
+			this.driver.findElement(locator);
+			return true;
+		}catch(Exception ex) {
+			return false;
+		}
 	}
 }
