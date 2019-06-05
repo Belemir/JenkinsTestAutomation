@@ -7,8 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
-public class App {
-	WebDriver driver;
+public class App extends Util{
 	By popUp = By.xpath("/html/body/div[8]/div/div/a");
 			
 	@Test
@@ -22,6 +21,7 @@ public class App {
 
 		if(this.checkElementIsExistByLocator(popUp)) {
 			WebElement close = driver.findElement(popUp);
+			waitUntilVisibleByLocator(popUp);
 			close.click();
 		};
 		
@@ -29,12 +29,5 @@ public class App {
 		action.moveToElement(takiElement).build().perform();
 	}
 
-	public boolean checkElementIsExistByLocator(By locator) {
-		try {
-			this.driver.findElement(locator);
-			return true;
-		}catch(Exception ex) {
-			return false;
-		}
-	}
+	
 }
